@@ -1,18 +1,14 @@
 #!/bin/bash
 
-GRAPHITE_WEB_PORT=${GRAPHITE_WEB_PORT:-80}
-GRAFANA_ELASTICSEARCH_PORT=${GRAFANA_ELASTICSEARCH_PORT:-9200}
-
-sed s/{{GRAPHITE_WEB_PORT}}/$GRAPHITE_WEB_PORT/g -i /usr/share/grafana/config.js
-sed s/{{GRAFANA_ELASTICSEARCH_PORT}}/$GRAFANA_ELASTICSEARCH_PORT/g -i /usr/share/grafana/config.js
-
-
-
 set -e
+
+chown -R _graphite:_graphite /app/whisper
+rmdir /var/lib/graphite/whisper
+ln -s /app/whisper /var/lib/graphite/whisper 
+chown -R _graphite:_graphite /var/lib/graphite/whisper
 
 service carbon-cache start
 service apache2 start
-service elasticsearch start
 
 
 bash
