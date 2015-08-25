@@ -9,21 +9,22 @@ RUN apt-get install -y graphite-web apache2 apache2-mpm-worker libapache2-mod-ws
 
 RUN echo "CARBON_CACHE_ENABLED=true" > /etc/default/graphite-carbon
 
-# Prepare and migrate the SQLite database
-RUN chown _graphite /var/lib/graphite
-RUN sudo -u _graphite graphite-manage syncdb --noinput
 
 # Configure httpd
 RUN rm -f /etc/apache2/sites-enabled/000-default.conf
 RUN cp /usr/share/graphite-web/apache2-graphite.conf /etc/apache2/sites-enabled/graphite.conf
 
+
+RUN apt-get install -y expect
+
 COPY assets /app/assets
+
 
 # WEB carbon API
 EXPOSE 80 2003
 
 # ソース保存先
-VOLUME ["/app/whisper"]
+VOLUME ["/app/graphite"]
 
 RUN chmod 755 /app/assets/entrypoint.sh
 ENTRYPOINT ["/app/assets/entrypoint.sh"]

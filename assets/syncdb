@@ -1,0 +1,28 @@
+#!/usr/bin/env expect
+# borrow from https://github.com/hopsoft/docker-graphite-statsd/blob/master/scripts/django_admin_init.exp 
+
+set timeout -1
+
+spawn graphite-manage syncdb
+
+expect "Would you like to create one now" {
+  send "yes\n"
+}
+
+expect "Username (leave blank to use 'root'):" {
+  send "{{ROOT_USER_NAME}}\n"
+}
+
+expect "Email address:" {
+  send "{{ROOT_EMAIL}}\n"
+}
+
+expect "Password:" {
+  send "{{ROOT_PASSWORD}}\n"
+}
+
+expect "Password *:" {
+  send "{{ROOT_PASSWORD}}\n"
+}
+
+expect "Superuser created successfully"
