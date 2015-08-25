@@ -34,6 +34,8 @@ RUN echo "alias /grafana /usr/share/grafana" > /etc/apache2/sites-enabled/grafan
 RUN apt-get install -y python-txamqp
 
 
+COPY assets/grafana/config.js /usr/share/grafana/config.js
 COPY assets /app/assets
+
 RUN chmod 755 /app/assets/entrypoint.sh
 ENTRYPOINT ["/app/assets/entrypoint.sh"]
