@@ -5,7 +5,7 @@ set -e
 
 ROOT_USER_NAME=${ROOT_USER_NAME:-root}
 ROOT_PASSWORD=${ROOT_PASSWORD:-root}
-ROOT_EMAIL=${ROOT_EMAIL:-tomohiro.teranishi@gmail.com}
+ROOT_EMAIL=${ROOT_EMAIL:-example@example.com}
 
 sed s/{{ROOT_USER_NAME}}/$ROOT_USER_NAME/g -i /app/assets/syncdb
 sed s/{{ROOT_PASSWORD}}/$ROOT_PASSWORD/g -i /app/assets/syncdb
