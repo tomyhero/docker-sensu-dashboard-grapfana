@@ -36,6 +36,9 @@ ln -s /app/graphite/whisper/graphite.db /var/lib/graphite/graphite.db
 
 chown -R _graphite:_graphite /var/lib/graphite
 
+
+cp /app/assets/storage-schemas.conf /etc/carbon/storage-schemas.conf
+
 service carbon-cache start
 service apache2 start
 
